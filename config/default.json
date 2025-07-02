@@ -1,0 +1,13 @@
+{
+  "discord": {
+    "token": "YOUR_DISCORD_TOKEN",
+    "clientId": "YOUR_DISCORD_CLIENT_ID",
+    "guildId": "YOUR_DISCORD_GUILD_ID"
+  },
+  "mysql": {
+    "host": "YOUR_MYSQL_HOST",
+    "user": "YOUR_MYSQL_USER",
+    "password": "YOUR_MYSQL_PASSWORD"
+  },
+  "image": "YOUR_IMAGE_LINK"
+} 

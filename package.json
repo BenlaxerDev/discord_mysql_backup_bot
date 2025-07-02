@@ -1,0 +1,19 @@
+{
+  "name": "avocatodev_mysql_backup_bot",
+  "version": "1.0.0",
+  "description": "Ein Discord-Bot, der automatisch MySQL-Backups erstellt.",
+  "main": "index.js",
+  "author": {
+    "name": "BenlaxerDev"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "config": "^3.3.7",
+    "discord.js": "^14.20.0",
+    "find-remove": "^4.0.4",
+    "mysqldump": "^3.2.0",
+    "node-cron": "^3.0.0"
+  }
+}
