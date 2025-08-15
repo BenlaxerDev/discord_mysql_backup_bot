@@ -9,5 +9,11 @@
     "user": "YOUR_MYSQL_USER",
     "password": "YOUR_MYSQL_PASSWORD"
   },
+  "cron": {
+    "enabled": true,
+    "schedule": "* * * * *",
+    "channelId": "YOUR_DISCORD_CHANNEL_ID",
+    "databases": ["database1", "database2"]
+  },
   "image": "YOUR_IMAGE_LINK"
 } 

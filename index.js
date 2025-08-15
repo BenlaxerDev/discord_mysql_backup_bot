@@ -29,9 +29,25 @@ if (!fs.existsSync(BACKUP_DIR)) {
   }
 })();
 
+const cron = require('node-cron');
+const { createBackup } = require('./commands/backup.js');
+
 client.once('ready', async () => {
   console.log(`Eingeloggt als ${client.user.tag}`);
   await registerSlashCommands();
+
+  // Cronjob für automatische Backups
+  const cronConfig = config.get('cron');
+  if (cronConfig.enabled) {
+    cron.schedule(cronConfig.schedule, () => {
+      console.log('Führe geplante Backups aus...');
+      cronConfig.databases.forEach(dbName => {
+        console.log(`Erstelle Backup für Datenbank: ${dbName}`);
+        createBackup(client, dbName);
+      });
+    });
+    console.log('Automatischer Backup-Cronjob wurde eingerichtet.');
+  }
 });
 
 async function registerSlashCommands() {
