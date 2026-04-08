@@ -21,8 +21,8 @@ module.exports = {
       .setTitle('🏓 Pong!')
       .setDescription(`**Latenz:** \`${latency}ms\``)
       .addFields({ name: '💡 Fun Fact', value: fact })
-      .setImage(config.get('thumbnail'))
+      .setImage(config.get('image'))
       .setFooter({ text: 'AvocatoDev Ping Service' });
     await interaction.editReply({ content: null, embeds: [embed] });
   }
-}; 
+};  

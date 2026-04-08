@@ -38,8 +38,8 @@ module.exports = {
           value: `Datei: \`${b.filename}\`\nErstellt: <t:${Math.floor(Number(b.timestamp)/1000)}:F>`
         }))
       )
-      .setImage(require('config').get('thumbnail'))
+      .setImage(require('config').get('image'))
       .setFooter({ text: `🟢 AvocatoDev Backup Service • Stand: ${new Date().toLocaleString('de-DE')}` });
     await interaction.reply({ embeds: [embed] });
   }
-}; 
+};  

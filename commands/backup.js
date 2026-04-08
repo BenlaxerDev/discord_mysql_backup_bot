@@ -66,7 +66,7 @@ module.exports = {
           { name: '⏰ Timestamp', value: `<t:${Math.floor(timestamp / 1000)}:F>` },
           { name: '🆔 Backup-ID', value: `#${backupId}` }
         )
-        .setImage(config.get('thumbnail'))
+        .setImage(config.get('image'))
         .setFooter({ 
           text: `🟢 AvocatoDev Backup Service © 2022-${now.getFullYear()} • ${now.toLocaleTimeString('de-DE')}`
         });
@@ -79,4 +79,4 @@ module.exports = {
       await interaction.editReply('❌ Fehler beim Backup: ' + err.message);
     }
   }
-}; 
+};  

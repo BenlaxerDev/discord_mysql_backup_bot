@@ -55,8 +55,13 @@ client.on('interactionCreate', async interaction => {
     await command.execute(interaction);
   } catch (error) {
     console.error(error);
-    await interaction.reply({ content: 'Beim Ausführen des Befehls ist ein Fehler aufgetreten!', ephemeral: true });
+    const errorMsg = { content: 'Beim Ausführen des Befehls ist ein Fehler aufgetreten!', ephemeral: true };
+    if (interaction.deferred || interaction.replied) {
+      await interaction.editReply(errorMsg);
+    } else {
+      await interaction.reply(errorMsg);
+    }
   }
 });
 
-client.login(token); 
+client.login(token);  
