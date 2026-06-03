@@ -3,7 +3,7 @@ const config = require('config');
 const mysql = require('mysql2/promise');
 const fs = require('fs');
 const path = require('path');
-const { exec } = require('child_process');
+const { execFile } = require('child_process');
 
 const mysqlConfig = config.get('mysql');
 const BACKUP_DIR = path.join(__dirname, '..', 'sql_backups');
@@ -58,8 +58,15 @@ module.exports = {
     await interaction.deferReply();
     const now = new Date();
     // Importiere das Backup in die Datenbank
-    const importCmd = `mysql -u${mysqlConfig.user} -p${mysqlConfig.password} -h${mysqlConfig.host} ${dbName} < "${filepath}"`;
-    exec(importCmd, (error, stdout, stderr) => {
+    const args = [
+      `-u${mysqlConfig.user}`,
+      `-p${mysqlConfig.password}`,
+      `-h${mysqlConfig.host}`,
+      dbName,
+      '-e',
+      `source ${filepath}`
+    ];
+    execFile('mysql', args, (error, stdout, stderr) => {
       if (error) {
         interaction.editReply(`❌ Fehler beim Wiederherstellen: ${stderr || error.message}`);
         return;
@@ -73,9 +80,9 @@ module.exports = {
           { name: '🗄️ Ziel-Datenbank', value: `\`\`\`${dbName}\`\`\`` },
           { name: '⏰ Timestamp', value: `<t:${Math.floor(now.getTime() / 1000)}:F>` }
         )
-        .setImage(require('config').get('thumbnail'))
+        .setImage(require('config').get('image'))
         .setFooter({ text: `🟢 AvocatoDev Backup Service © 2022-${now.getFullYear()} • ${now.toLocaleTimeString('de-DE')}` });
       interaction.editReply({ content: '✅ Wiederherstellung abgeschlossen!', embeds: [embed] });
     });
   }
-}; 
+};  
